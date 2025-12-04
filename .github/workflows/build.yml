@@ -1,6 +1,6 @@
 name: Build Java JAR
 
-# 手动触发或 push
+# 触发方式
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build JAR
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 在 Ubuntu 上构建
 
     steps:
       # 1. 检出代码
@@ -28,9 +28,9 @@ jobs:
       - name: Compile Java
         run: |
           mkdir -p out
-          javac -d out ScriptMuxer.java
+          javac -d out ScriptMuxer.java  # 编译 Java 文件
 
-      # 4. 创建 MANIFEST.MF
+      # 4. 创建 MANIFEST.MF 文件
       - name: Create manifest
         run: |
           echo "Main-Class: ScriptMuxer" > out/MANIFEST.MF
@@ -39,7 +39,7 @@ jobs:
       - name: Build JAR
         run: |
           cd out
-          jar cfm ../ScriptMuxer.jar MANIFEST.MF ScriptMuxer.class
+          jar cfm ../ScriptMuxer.jar MANIFEST.MF ScriptMuxer.class ScriptMuxer$Script.class  # 打包 JAR
           cd ..
 
       # 6. 上传 JAR 作为 artifact
