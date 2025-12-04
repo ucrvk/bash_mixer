@@ -28,7 +28,7 @@ jobs:
       - name: Compile Java
         run: |
           mkdir -p out
-          javac -d out main.java
+          javac -d out ScriptMuxer.java
 
       # 4. 创建 MANIFEST.MF
       - name: Create manifest
